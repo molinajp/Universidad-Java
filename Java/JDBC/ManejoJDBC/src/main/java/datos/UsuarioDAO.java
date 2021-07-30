@@ -4,22 +4,20 @@ import static datos.Conexion.*;
 import domain.Usuario;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UsuarioDAO {
 
-    private static final String SQL_INSERT = "INSERT INTO usuario (usuario, "
+    private static final String SQL_INSERT = "INSERT INTO usuario (username, "
             + "password) VALUES(?, ?)";
 
-    private static final String SQL_UPDATE = "UPDATE usuario SET usuario = ?, "
-            + "password = ? WHERE id_persona = ?";
+    private static final String SQL_UPDATE = "UPDATE usuario SET username = ?, "
+            + "password = ? WHERE id_usuario = ?";
 
     private static final String SQL_DELETE = "DELETE FROM usuario WHERE "
-            + "id_persona = ?";
+            + "id_usuario = ?";
 
     private static final String SQL_SELECT = "SELECT id_usuario, "
-            + "usuario, password FROM usuario";
+            + "username, password FROM usuario";
 
     public List<Usuario> select() {
         Connection connection = null;
@@ -27,14 +25,14 @@ public class UsuarioDAO {
         ResultSet resultSet = null;
         List<Usuario> usuarios = new ArrayList();
         try {
-            connection = getConexion();
+            connection = getConnection();
             prepState = connection.prepareStatement(SQL_SELECT);
             resultSet = prepState.executeQuery();
             while (resultSet.next()) {
                 var id = resultSet.getInt("id_usuario");
-                var usuario = resultSet.getString("usuario");
+                var username = resultSet.getString("username");
                 var password = resultSet.getString("password");
-                usuarios.add(new Usuario(id, usuario, password));
+                usuarios.add(new Usuario(id, username, password));
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -55,9 +53,9 @@ public class UsuarioDAO {
         PreparedStatement prepState = null;
         int insertados = 0;
         try {
-            connection = getConexion();
+            connection = getConnection();
             prepState = connection.prepareStatement(SQL_INSERT);
-            prepState.setString(1, usuario.getUsuario());
+            prepState.setString(1, usuario.getUsername());
             prepState.setString(2, usuario.getPassword());
             insertados = prepState.executeUpdate();
         } catch (SQLException ex) {
@@ -78,9 +76,9 @@ public class UsuarioDAO {
         PreparedStatement prepState = null;
         int eliminados = 0;
         try {
-            connection = getConexion();
+            connection = getConnection();
             prepState = connection.prepareStatement(SQL_DELETE);
-            prepState.setInt(1, usuario.getUsuarioId());
+            prepState.setInt(1, usuario.getId_usuario());
             eliminados = prepState.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -100,11 +98,11 @@ public class UsuarioDAO {
         PreparedStatement prepState = null;
         int eliminados = 0;
         try {
-            connection = getConexion();
+            connection = getConnection();
             prepState = connection.prepareStatement(SQL_UPDATE);
-            prepState.setString(1, usuario.getUsuario());
+            prepState.setString(1, usuario.getUsername());
             prepState.setString(2, usuario.getPassword());
-            prepState.setInt(3, usuario.getUsuarioId());
+            prepState.setInt(3, usuario.getId_usuario());
             eliminados = prepState.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);

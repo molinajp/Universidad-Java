@@ -2,9 +2,9 @@ package domain;
 
 public class Usuario {
     
-    private int usuarioId;
+    private int id_usuario;
     
-    private String usuario;
+    private String username;
     
     private String password;
 
@@ -12,34 +12,34 @@ public class Usuario {
     }
 
     public Usuario(int usuarioId) {
-        this.usuarioId = usuarioId;
+        this.id_usuario = usuarioId;
     }
 
     public Usuario(String usuario, String password) {
-        this.usuario = usuario;
+        this.username = usuario;
         this.password = password;
     }
 
     public Usuario(int usuarioId, String usuario, String password) {
-        this.usuarioId = usuarioId;
-        this.usuario = usuario;
+        this.id_usuario = usuarioId;
+        this.username = usuario;
         this.password = password;
     }
 
-    public int getUsuarioId() {
-        return usuarioId;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -52,7 +52,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "usuarioId=" + usuarioId + ", usuario=" + usuario + 
+        return "Usuario{" + "usuarioId=" + id_usuario + ", usuario=" + username + 
                 ", password=" + password + '}';
     }
     
