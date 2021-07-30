@@ -8,7 +8,7 @@ public class Conexion {
             + "useSSL=false&useTimezone=true&serverTimezone=UTC&"
             + "allowPublicKeyRetrieval=true";
     private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "Escritorio*10";
+    private static final String JDBC_PASSWORD = "nada";//cambiar a la otra contraseña
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
